@@ -1,16 +1,10 @@
 <template>
   <div class="app-layout">
-    <AppHeader
-      @clear-all="roomCanvas?.clearAll()"
-      @restart="roomCanvas?.restart()"
-    />
+    <AppHeader @clear-all="roomCanvas?.clearAll()" @restart="roomCanvas?.restart()" />
 
     <div class="main-content">
-      <FurnitureSidebar
-        :furniture-list="furnitureList"
-        @wall-color-change="roomCanvas?.changeWallColor($event)"
-        @floor-change="roomCanvas?.changeFloorColor($event)"
-      />
+      <FurnitureSidebar :furniture-list="furnitureList" @wall-color-change="roomCanvas?.changeWallColor($event)"
+        @floor-change="roomCanvas?.changeFloorColor($event)" />
       <RoomCanvas ref="roomCanvas" />
     </div>
   </div>
@@ -67,19 +61,32 @@ const ICONS = {
 }
 
 const furnitureList = [
-  { id: 'sofa',       label: 'Sofá',       color: 0x9b59b6, iconBg: '#f3e8ff', icon: ICONS.sofa },
-  { id: 'mesa',       label: 'Mesa',       color: 0x8B4513, iconBg: '#fef3c7', icon: ICONS.mesa },
-  { id: 'silla',      label: 'Silla',      color: 0x2c3e50, iconBg: '#e0f2fe', icon: ICONS.silla },
-  { id: 'cama',       label: 'Cama',       color: 0x3498db, iconBg: '#dbeafe', icon: ICONS.cama },
-  { id: 'lampara',    label: 'Lámpara',    color: 0xf1c40f, iconBg: '#fef9c3', icon: ICONS.lampara },
+  { id: 'sofa', label: 'Sofá', color: 0x9b59b6, iconBg: '#f3e8ff', icon: ICONS.sofa },
+  { id: 'mesa', label: 'Mesa', color: 0x8B4513, iconBg: '#fef3c7', icon: ICONS.mesa },
+  { id: 'silla', label: 'Silla', color: 0x2c3e50, iconBg: '#e0f2fe', icon: ICONS.silla },
+  { id: 'cama', label: 'Cama', color: 0x3498db, iconBg: '#dbeafe', icon: ICONS.cama },
+  { id: 'lampara', label: 'Lámpara', color: 0xf1c40f, iconBg: '#fef9c3', icon: ICONS.lampara },
   { id: 'estanteria', label: 'Estantería', color: 0x27ae60, iconBg: '#dcfce7', icon: ICONS.estanteria },
 ]
 </script>
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body, #app { height: 100%; overflow: hidden; }
-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
 .app-layout {
   display: flex;

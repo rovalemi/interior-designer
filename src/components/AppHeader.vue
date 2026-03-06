@@ -40,7 +40,7 @@ defineEmits(['clear-all', 'restart'])
   height: 60px;
   background: #2c3e50;
   border-bottom: 1px solid rgba(147, 197, 253, 0.2);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
   z-index: 10;
 }
@@ -57,7 +57,7 @@ defineEmits(['clear-all', 'restart'])
   justify-content: center;
   width: 42px;
   height: 42px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   border: 1px solid rgba(147, 197, 253, 0.2);
 }
@@ -96,12 +96,13 @@ defineEmits(['clear-all', 'restart'])
 }
 
 .btn-restart {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #e0f2fe;
   border: 1px solid rgba(147, 197, 253, 0.3);
 }
+
 .btn-restart:hover {
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   border-color: rgba(147, 197, 253, 0.6);
   transform: translateY(-1px);
 }
@@ -111,6 +112,7 @@ defineEmits(['clear-all', 'restart'])
   color: #fca5a5;
   border: 1px solid rgba(239, 68, 68, 0.35);
 }
+
 .btn-clear:hover {
   background: rgba(239, 68, 68, 0.28);
   border-color: rgba(239, 68, 68, 0.6);
@@ -118,5 +120,7 @@ defineEmits(['clear-all', 'restart'])
   transform: translateY(-1px);
 }
 
-.btn-action:active { transform: translateY(0); }
+.btn-action:active {
+  transform: translateY(0);
+}
 </style>

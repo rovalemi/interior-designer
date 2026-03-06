@@ -26,7 +26,12 @@ export function useRoom() {
     scene.background = new THREE.Color(0xe8edf2)
     scene.fog = new THREE.Fog(0xe8edf2, 20, 40)
 
-    camera = new THREE.PerspectiveCamera(55, canvas.clientWidth / canvas.clientHeight, 0.1, 100)
+    camera = new THREE.PerspectiveCamera(
+      55,
+      canvas.clientWidth / canvas.clientHeight,
+      0.1,
+      100
+    )
     updateCameraPosition()
 
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
@@ -100,6 +105,16 @@ export function useRoom() {
       s.rotation.y = p.ry
       scene.add(s)
     })
+  }
+
+  function changeWallColor(hexColor) {
+    wallMeshes.forEach(w => {
+      if (w.material) w.material.color.setHex(hexColor)
+    })
+  }
+
+  function changeFloorColor(hexColor) {
+    if (floorMesh) floorMesh.material.color.setHex(hexColor)
   }
 
   function createFurnitureMesh(type, color) {
@@ -216,7 +231,7 @@ export function useRoom() {
         shadeCap.rotation.x = -Math.PI / 2
         shadeCap.position.y = 1.74
         group.add(shadeCap)
-        // Luz puntual
+
         const bulbLight = new THREE.PointLight(0xffe4a0, 0.8, 5)
         bulbLight.position.y = 1.55
         group.add(bulbLight)
@@ -372,9 +387,11 @@ export function useRoom() {
     if (event.button === 2) {
       const hit = getHitFurniture(event)
       if (hit) {
+
         hit.userData.rotY = (hit.userData.rotY || 0) + Math.PI / 2
         hit.rotation.y = hit.userData.rotY
       } else if (cameraMode === 'explore') {
+
         isOrbiting = true
         lastMouseX = event.clientX
         lastMouseY = event.clientY
@@ -391,6 +408,7 @@ export function useRoom() {
         canvasEl.style.cursor = 'grabbing'
       } else {
         highlightObject(null)
+
         if (cameraMode === 'explore') {
           isOrbiting = true
           lastMouseX = event.clientX
@@ -478,10 +496,14 @@ export function useRoom() {
 
   function restart() {
     clearAll()
+
     cameraAngleX = 0.55
     cameraAngleY = 0.8
     cameraRadius = 14
     updateCameraPosition()
+
+    changeWallColor(0xcccccc)
+    changeFloorColor(0xc8a46e)
     return 0
   }
 
@@ -515,6 +537,8 @@ export function useRoom() {
     restart,
     onResize,
     destroy,
+    changeWallColor,
+    changeFloorColor,
     setCameraMode,
   }
 }
