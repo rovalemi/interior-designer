@@ -86,7 +86,7 @@ export function useRoom() {
 
     const wallMat = new THREE.MeshLambertMaterial({ color: 0xcccccc, side: THREE.BackSide })
     const box = new THREE.Mesh(new THREE.BoxGeometry(size, h, size), wallMat)
-    box.position.y = h / 2
+    box.position.y = h / 2 + 0.01
     box.name = 'walls'
     wallMeshes = [box]
     scene.add(box)

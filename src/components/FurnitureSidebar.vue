@@ -118,7 +118,10 @@ const floorStyles = [
 
 function onDragStart(event, item) {
   event.dataTransfer.setData('furniture', JSON.stringify(item))
-  event.dataTransfer.effectAllowed = 'copy'
+  // event.dataTransfer.effectAllowed = 'copy'
+  const empty = document.createElement('canvas')
+  empty.width = empty.height = 1
+  event.dataTransfer.setDragImage(empty, 0, 0)
 }
 
 function selectWallColor(c) {
