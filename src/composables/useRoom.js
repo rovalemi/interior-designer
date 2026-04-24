@@ -286,6 +286,10 @@ export function useRoom() {
       }
     })
 
+    group.userData.box = new THREE.Box3().setFromObject(group)
+    group.userData.size = new THREE.Vector3()
+    group.userData.box.getSize(group.userData.size)
+
     return group
   }
 
@@ -319,6 +323,11 @@ export function useRoom() {
       0,
       Math.max(-4.2, Math.min(4.2, target.z))
     )
+
+    if (intersectsAny(group)) {
+      return null
+    }
+
     group.userData = { type: item.id, label: item.label, rotY: 0 }
 
     scene.add(group)
@@ -440,8 +449,16 @@ export function useRoom() {
       const target = new THREE.Vector3()
       raycaster.ray.intersectPlane(floorPlane, target)
 
+      const oldX = selectedObject.position.x
+      const oldZ = selectedObject.position.z
+
       selectedObject.position.x = Math.max(-4.2, Math.min(4.2, target.x))
       selectedObject.position.z = Math.max(-4.2, Math.min(4.2, target.z))
+
+      if (intersectsAny(selectedObject)) {
+        selectedObject.position.x = oldX
+        selectedObject.position.z = oldZ
+      }
     }
   }
 
@@ -529,6 +546,17 @@ export function useRoom() {
   function setCameraMode(mode) {
     cameraMode = mode
     isOrbiting = false
+  }
+
+  function intersectsAny(object) {
+    const box1 = new THREE.Box3().setFromObject(object)
+
+    for (const other of placedFurniture) {
+      if (other === object) continue
+      const box2 = new THREE.Box3().setFromObject(other)
+      if (box1.intersectsBox(box2)) return true
+    }
+    return false
   }
 
   return {
